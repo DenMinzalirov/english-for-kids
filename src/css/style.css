@@ -44,7 +44,8 @@ body {
 .app-navigation.active {
   visibility: visible;
   opacity: 1;
-  transform: translate(0, 100%); 
+  transform: translate(0, 100%);
+  z-index: 1;
 }
 
 /* switch */

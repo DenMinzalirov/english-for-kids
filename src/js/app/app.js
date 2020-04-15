@@ -1,10 +1,13 @@
 import '../header/navBar'
+import './app.css'
+import cards from '../card/data';
 import renderCard from '../card/card'
 
 const init = () => {
-    console.log(renderCard());
     const main = document.querySelector('main');
-    main.append(renderCard())
+    cards.map((el) => {
+        return main.append(renderCard(el))
+    })
 }
 
 export default init

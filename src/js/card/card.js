@@ -1,4 +1,4 @@
-import cards from './data';
+
 import './card.css'
 
 
@@ -29,24 +29,28 @@ class Card {
                     ${this.translation}
                 </div>
             </div>
+            <audio id=${this.word} src=${this.audioSrc}></audio>
          </figure>`;
         const rotateNod = cardItem.querySelector('.rotate');
         const cardFlip = cardItem.querySelector('.card-flip');
-        console.log('rotateNod', rotateNod);
         rotateNod.addEventListener('click', () => {
             cardFlip.classList.add('activeRotate');
-            console.log('click', cardFlip);
         })
         cardFlip.addEventListener('mouseleave', () => {
             cardFlip.classList.remove('activeRotate');
+        })
+        cardItem.addEventListener('click', (e) => {
+            if (e.target.tagName === 'IMG') {
+                const play = document.getElementById(this.word)
+                play.play();
+            }
         })
         return cardItem
     }
 }
 
-const renderCard = () => {
-    console.log('cards data', cards)
-    const item = new Card(cards)
+const renderCard = (card) => {
+    const item = new Card(card)
     return item.generateCard()
 }
 

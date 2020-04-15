@@ -1,4 +1,5 @@
 const path = require('path');
+// var SRC = path.resolve(__dirname, 'src/audio');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -26,7 +27,7 @@ function setDMode() {
 
 const config = {
   target: "web",
-  entry: {index: './src/js/index.js'},
+  entry: { index: './src/js/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
@@ -35,104 +36,115 @@ const config = {
   devtool: setDevTool(),
   module: {
     rules: [{
-        test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader',
+        options: {
+          minimize: false
+        }
+      }]
+    },
+    {
+      test: /\.js$/,
+      use: ['babel-loader'/* , 'eslint-loader' */],
+      exclude: [
+        /node_modules/
+      ]
+    },
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
           options: {
-            minimize: false
+            sourceMap: true
           }
-        }]
-      },
-      {
-        test: /\.js$/,
-        use: ['babel-loader'/* , 'eslint-loader' */],
-        exclude: [
-          /node_modules/
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
+        }, {
+          loader: 'postcss-loader',
+          options: { sourceMap: true, config: { path: './postcss.config.js' } }
+        }
+      ]
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
           }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+        }, {
+          loader: 'postcss-loader',
+          options: { sourceMap: true, config: { path: './postcss.config.js' } }
+        }, {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
           }
-        ]
-      },
-      {
-        test: /\.(jpe?g|png|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'img',
-              name: '[name].[ext]'
-            }},
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug : true,
-              mozjpeg: {
-                progressive: true,
-                quality: 75
-              },
-              // optipng.enabled: false will disable optipng
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.90],
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false,
-                optimizationLevel: 1
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 75
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(woff|woff2|ttf|otf|eot)$/,
-        use: [{
+        }
+      ]
+    },
+    {
+      test: /\.(mp3|wav|wma|ogg)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'mp3',
+        }
+      }
+    },
+    {
+      test: /\.(jpe?g|png|svg|gif)$/,
+      use: [
+        {
           loader: 'file-loader',
           options: {
-            outputPath: 'fonts'
+            outputPath: 'img',
+            name: '[name].[ext]'
           }
-        }]
-      }
+        },
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            bypassOnDebug: true,
+            mozjpeg: {
+              progressive: true,
+              quality: 75
+            },
+            // optipng.enabled: false will disable optipng
+            optipng: {
+              enabled: false,
+            },
+            pngquant: {
+              quality: [0.65, 0.90],
+              speed: 4
+            },
+            gifsicle: {
+              interlaced: false,
+              optimizationLevel: 1
+            },
+            // the webp option will enable WEBP
+            webp: {
+              quality: 75
+            }
+          }
+        }
+      ]
+    },
+    {
+      test: /\.(woff|woff2|ttf|otf|eot)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          outputPath: 'fonts'
+        }
+      }]
+    }
     ]
   },
 
