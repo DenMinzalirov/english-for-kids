@@ -1,7 +1,4 @@
-
 import './card.css'
-
-
 
 class Card {
     constructor({ word, translation, image, audioSrc }) {

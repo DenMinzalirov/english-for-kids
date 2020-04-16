@@ -167,3 +167,11 @@ body {
   -webkit-transition: opacity 1s;
   transition: opacity 1s;
 }
+
+.card-container {
+  width: 300px;
+  height: 250px;
+  /* border: 1px solid #ccc;
+  border-radius: 5px; */
+  margin: 20px 25px;
+}
