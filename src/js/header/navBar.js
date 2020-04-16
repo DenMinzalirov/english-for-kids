@@ -10,3 +10,8 @@ toggleBtn.addEventListener('click', () => {
 toggleSwitch.addEventListener('click', () => {
     toggleSwitch.classList.toggle('toggle-on');
 })
+
+appNavigation.addEventListener('click', () => {
+    appNavigation.classList.toggle('active')
+    toggleBtn.classList.remove('on');
+})

@@ -8,64 +8,87 @@ import MainPageItem from '../mainPage/mainPageItem'
 
 const isTrain = true;
 const main = document.querySelector('main');
+const appNavigation = document.querySelector('.app-navigation')
+
+const renderMainPageItem = (el) => {
+    const item = new MainPageItem(el);
+    const mainPageElement = item.generateGroup();
+    return mainPageElement
+}
+
+const init = () => {
+    // setStateApp();
+
+    mainPages.map((el) => {
+        return main.append(renderMainPageItem(el))
+    })
+}
 
 const clickRender = (e) => {
-    if (e.target.closest('.main-card')) {
-        console.log(e.target.closest('.main-card').name)
-    }
-    if (e.target.closest('.main-card').name === 'actionSetA') {
+    const clickName = e.target.closest('.main-card') || e.target;
+
+    if (clickName.name === 'actionSetA') {
         main.innerHTML = ''
         actionSetA.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'actionSetB') {
+    if (clickName.name === 'actionSetB') {
         main.innerHTML = ''
         actionSetB.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'actionSetC') {
+    if (clickName.name === 'actionSetC') {
         main.innerHTML = ''
         actionSetС.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'adjective') {
+    if (clickName.name === 'adjective') {
         main.innerHTML = ''
         adjective.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'animalSetA') {
+    if (clickName.name === 'animalSetA') {
         main.innerHTML = ''
         animalSetA.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'animalSetB') {
+    if (clickName.name === 'animalSetB') {
         main.innerHTML = ''
         animalSetB.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'clothes') {
+    if (clickName.name === 'clothes') {
         main.innerHTML = ''
         clothes.map((el) => {
             return main.append(renderCard(el))
         })
     }
-    if (e.target.closest('.main-card').name === 'emotion') {
+    if (clickName.name === 'emotion') {
         main.innerHTML = ''
         emotion.map((el) => {
-            return main.append(renderCard(el))
+            return main.append(renderCard(el));
         })
     }
 
-    main.removeEventListener('click', clickRender)
+    main.removeEventListener('click', clickRender);
+
+    if (clickName.name === 'mainPage') {
+        main.innerHTML = ''
+        mainPages.map((el) => {
+            return main.append(renderMainPageItem(el))
+        })
+        main.addEventListener('click', clickRender);
+    }
 }
 
-main.addEventListener('click', clickRender)
+main.addEventListener('click', clickRender);
+appNavigation.addEventListener('click', clickRender)
 
 const setStateApp = () => {
     localStorage.setItem('isTrain', isTrain);
@@ -79,26 +102,9 @@ const setStateApp = () => {
     console.log(JSON.parse(localStorage.getItem('isTrain')))
 }
 
-const renderMainPageItem = (el) => {
-    const item = new MainPageItem(el);
-    const mainPageElement = item.generateGroup();
-    return mainPageElement
-}
-
-const init = () => {
-    setStateApp();
 
 
-    // render()
 
-    mainPages.map((el) => {
-        return main.append(renderMainPageItem(el))
-    })
-
-    // cards.map((el) => {
-    //     return main.append(renderCard(el))
-    // })
-}
 
 
 
