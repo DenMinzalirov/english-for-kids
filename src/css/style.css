@@ -56,11 +56,26 @@ body {
   opacity: 1;
   transform: translate(0, 0);
   z-index: 1;
-  height: 95vh;
+  height: auto;
   width: 320px;
 }
 .nav-link {
   padding: .7rem 1rem;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+.nav-link.active {
+  padding: .7rem 1rem;
+  color: red;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+  border: 1px solid yellow;
+  border-radius: 56%;
 }
 
 /* switch */
@@ -86,6 +101,9 @@ body {
   -webkit-transition: all .5s .15s ease-out;
   transition: all .5s .15s ease-out;
 }
+.toggle-button.green{
+  background: linear-gradient(180deg,#0099ae,#00bf82 100%,#fff 0,#fff);
+}
 
 .toggle-button{
   position: absolute;
@@ -93,7 +111,7 @@ body {
   width: 28px;
   bottom: 4px;
   right: 50px;
-  background-color: #cdcdcd;
+  background: linear-gradient(180deg,#fd6a63,#feb46b 100%,#fff 0,#fff);
   border-radius: 19px; 
   cursor: pointer;
   -webkit-transition: all .3s .1s, width .1s, top .1s, bottom .1s;

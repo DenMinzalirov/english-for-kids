@@ -8,11 +8,12 @@ class Card {
         this.audioSrc = audioSrc;
     }
 
-    generateCard() {
+    generateCard(isTrain) {
         const cardItem = document.createElement('div');
         cardItem.classList.add('card-container');
-        cardItem.innerHTML =
-            `<figure class="card card-flip">
+        if (isTrain) {
+            cardItem.innerHTML =
+                `<figure class="card card-flip">
             <div class="card">
                <img class="card-img-top img-fluid" src=${this.image} alt="">
                <div class="card-footer bg-aqua">
@@ -28,27 +29,42 @@ class Card {
             </div>
             <audio id=${this.word} src=${this.audioSrc}></audio>
          </figure>`;
-        const rotateNod = cardItem.querySelector('.rotate');
-        const cardFlip = cardItem.querySelector('.card-flip');
-        rotateNod.addEventListener('click', () => {
-            cardFlip.classList.add('activeRotate');
-        })
-        cardFlip.addEventListener('mouseleave', () => {
-            cardFlip.classList.remove('activeRotate');
-        })
-        cardItem.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-                const play = document.getElementById(this.word)
-                play.play();
-            }
-        })
+
+            const rotateNod = cardItem.querySelector('.rotate');
+            const cardFlip = cardItem.querySelector('.card-flip');
+            rotateNod.addEventListener('click', () => {
+                cardFlip.classList.add('activeRotate');
+            })
+            cardFlip.addEventListener('mouseleave', () => {
+                cardFlip.classList.remove('activeRotate');
+            })
+            cardItem.addEventListener('click', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    const play = document.getElementById(this.word)
+                    play.play();
+                }
+            })
+
+        } else {
+            cardItem.innerHTML =
+                `<figure class="card card-flip">
+            <div class="card">
+               <img class="card-img-top img-fluid" src=${this.image} alt="">
+            </div>
+            <div class="card">
+                <img class="card-img-top img-fluid" src=${this.image} alt="">
+            </div>
+            <audio id=${this.word} src=${this.audioSrc}></audio>
+         </figure>`
+        }
+
         return cardItem
     }
 }
 
-const renderCard = (card) => {
+const renderCard = (card, isTrain) => {
     const item = new Card(card)
-    return item.generateCard()
+    return item.generateCard(isTrain)
 }
 
 export default renderCard

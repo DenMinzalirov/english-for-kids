@@ -7,21 +7,15 @@ class MainPageItem {
         this.name = name;
     }
 
-    generateGroup() {
+    generateGroup(isTrain) {
         const groupdItem = document.createElement('div');
+        const greenBack = isTrain ? '' : 'green';
         groupdItem.classList.add('card-container');
         groupdItem.innerHTML = `
-            <a class="main-card" name=${this.name}>
+            <a class="main-card ${greenBack}" name=${this.name}>
                 <img src=${this.imgGroup} alt=${this.wordGroup}>${this.wordGroup}
             </a>
         `
-        // groupdItem.addEventListener('click', (e) => {
-        //     if (e.target.closest('.main-card')) {
-        //         console.log(e.target.closest('.main-card').innerText)
-        //     }
-        //     const main = document.querySelector('main');
-        //     // main.innerHTML = ''
-        // })
         return groupdItem
     }
 }
