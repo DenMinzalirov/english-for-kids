@@ -5,11 +5,14 @@ import { actionSetA, actionSetB, actionSetС, adjective, animalSetA, animalSetB,
 import renderCard from '../card/card'
 // import renderGroupItem from '../mainPage/mainPageItem'
 import MainPageItem from '../mainPage/mainPageItem'
+import playGame from '../play/play'
 
 // let isTrain = true;
 // localStorage.setItem('isTrain', isTrain);
 
 const main = document.querySelector('main');
+const rating = document.querySelector('.rating');
+// const sectionPlayBtn = document.querySelector('section');
 const appNavigation = document.querySelector('.app-navigation');
 const toggleSwitch = document.querySelector('.toggle');
 
@@ -20,15 +23,20 @@ const renderMainPageItem = (el, stateGame) => {
 }
 
 const init = () => {
+    // playGame();
+    rating.innerHTML = '';
     main.innerHTML = '';
     const isTrain = JSON.parse(localStorage.getItem('isTrain'));
     const activePage = localStorage.getItem('activePage');
+    main.append(playGame(isTrain));
 
     if (activePage === 'mainPage') {
+        main.innerHTML = '';
         mainPages.map((el) => {
             return main.append(renderMainPageItem(el, isTrain))
         })
     }
+
     if (activePage === 'actionSetA') {
         actionSetA.map((el) => {
             return main.append(renderCard(el, isTrain))
@@ -74,61 +82,57 @@ const init = () => {
 toggleSwitch.addEventListener('click', () => { init() })
 
 const clickRender = (e) => {
+    // playGame();
+    rating.innerHTML = '';
+    main.innerHTML = '';
+
     const isTrain = JSON.parse(localStorage.getItem('isTrain'));
     const clickName = e.target.closest('.main-card') || e.target;
-
+    main.append(playGame(isTrain));
     switch (clickName.name) {
         case 'actionSetA':
-            main.innerHTML = ''
             actionSetA.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'actionSetA');
             break;
         case 'actionSetB':
-            main.innerHTML = ''
             actionSetB.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'actionSetB');
             break;
         case 'actionSetC':
-            main.innerHTML = ''
             actionSetС.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'actionSetC');
             break;
         case 'adjective':
-            main.innerHTML = ''
             adjective.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'adjective');
             break;
         case 'animalSetA':
-            main.innerHTML = ''
             animalSetA.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'animalSetA');
             break;
         case 'animalSetB':
-            main.innerHTML = ''
             animalSetB.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'animalSetB');
             break;
         case 'clothes':
-            main.innerHTML = ''
             clothes.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });
             localStorage.setItem('activePage', 'clothes');
             break;
         case 'emotion':
-            main.innerHTML = ''
             emotion.map((el) => {
                 return main.append(renderCard(el, isTrain))
             });

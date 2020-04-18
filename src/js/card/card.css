@@ -11,6 +11,10 @@
     filter: brightness(75%) saturate(50%);
 }
 /* Flip card */
+.card {
+    margin: 0;
+}
+
 .card-flip {
     background: none;
     border: none;
@@ -54,4 +58,12 @@
 
 img {
     object-fit: cover;
+}
+
+figure {
+    margin: 0;
+}
+
+.guessed {
+    opacity: 0.2;
 }

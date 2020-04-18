@@ -4,6 +4,7 @@ const toggleSwitch = document.querySelector('.toggle');
 const toggleSwitchBtn = document.querySelector('.toggle-button');
 const navLinlBtn = document.querySelectorAll('.nav-link');
 
+
 appNavigation.addEventListener("click", e => {
     if (e.target.className === "nav-link") {
         navLinlBtn.forEach((el) => {
@@ -19,13 +20,16 @@ toggleBtn.addEventListener('click', () => {
 });
 
 toggleSwitch.addEventListener('click', (e) => {
+    // const start = document.querySelector('.start');
     toggleSwitch.classList.toggle('toggle-on');
     toggleSwitchBtn.classList.toggle('green');
 
     if (e.target.parentElement.className.includes('toggle-on')) {
         localStorage.setItem('isTrain', false);
+        // start.classList.add('active');
     } else {
         localStorage.setItem('isTrain', true);
+        // start.classList.remove('active');
     }
 })
 

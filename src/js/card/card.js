@@ -47,15 +47,15 @@ class Card {
 
         } else {
             cardItem.innerHTML =
-                `<figure class="card card-flip">
+                `<figure class="card card-flip" id=${this.word}>
             <div class="card">
-               <img class="card-img-top img-fluid" src=${this.image} alt="">
+               <img class="card-img-top img-fluid gameImg" id=${this.word} src=${this.image} alt="">
             </div>
             <div class="card">
                 <img class="card-img-top img-fluid" src=${this.image} alt="">
             </div>
-            <audio id=${this.word} src=${this.audioSrc}></audio>
-         </figure>`
+            <audio id=${this.word} class='audio' src=${this.audioSrc}></audio>
+         </figure>`;
         }
 
         return cardItem

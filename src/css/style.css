@@ -202,9 +202,95 @@ body {
 }
 
 .card-container {
-  width: 300px;
-  height: 250px;
+  width: 290px;
+  height: auto;
   /* border: 1px solid #ccc;
   border-radius: 5px; */
   margin: 20px 25px;
+}
+
+.card-container:hover {
+  box-shadow: -1px 5px 15px 0 rgba(0,0,0,.5);
+  cursor: pointer;
+}
+
+.start {
+  display: none;
+  padding: 0 25px;
+  font-size: 24px;
+  height: auto;
+  background: linear-gradient(40deg,#ffd86f,#fc6262);
+  color: #fff;
+  border-radius: 10px;
+  border-width: 1px;
+  -webkit-transition: .3s;
+  transition: .3s;
+  height: 36px;
+}
+
+.start.active {
+  display: block;
+  background: linear-gradient(180deg,#0099ae,#00bf82 100%,#fff 0,#fff);
+  position: absolute;
+  top: 2%;
+}
+
+.rating {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 0 auto;
+  height: 46px;
+  overflow-x: hidden;
+  line-height: 36px;
+  font-size: 36px;
+  color: #fc6262;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.9em;
+  margin-right: 0.9em;
+  margin-bottom: 1.2em;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0.7em solid #fc0;
+  border-left: 0.3em solid transparent;
+ /* Controlls the size of the stars. */
+  font-size: 24px;
+}
+.star:before, .star:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0.6em;
+  left: -1em;
+  border-right: 1em solid transparent;
+  border-bottom: 0.7em solid #fc0;
+  border-left: 1em solid transparent;
+  transform: rotate(-35deg);
+}
+.star:after {
+  transform: rotate(35deg);
+}
+
+.star.black {
+  border-bottom: 0.7em solid #000;
+}
+.star.black:before, .star.black:after {
+  content: '';
+  border-bottom: 0.7em solid #000;
+}
+
+@media (max-width: 424px) {
+  .start.active {
+    max-width: 129px;
+    left: 66px;
+    font-size: 16px;
+    padding-top: 5px;
+  }
 }
