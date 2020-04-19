@@ -11,6 +11,7 @@ class MainPageItem {
         const groupdItem = document.createElement('div');
         const greenBack = isTrain ? '' : 'green';
         groupdItem.classList.add('card-container');
+        groupdItem.classList.add('section-group');
         groupdItem.innerHTML = `
             <a class="main-card ${greenBack}" name=${this.name}>
                 <img src=${this.imgGroup} alt=${this.wordGroup}>${this.wordGroup}

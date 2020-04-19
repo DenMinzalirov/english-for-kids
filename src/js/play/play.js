@@ -32,21 +32,10 @@ const playGame = (isTrain) => {
         })
 
         const gameListener = (e) => {
-            if (playArr.length === 1) {
-                const main = document.querySelector('main');
-                main.innerHTML = `
-                <img class="vin" src='./img/success.jpg' alt="">`;
-                success.play();
-                // localStorage.setItem('activePage', 'mainPage');
-                // localStorage.setItem('isTrain', 'true');
-                // setTimeout(() => {
-                //     init();
-                // }, 1000);
-                console.log('vin');
-            }
             const rating = document.querySelector('.rating');
             const star = document.createElement('div');
             star.classList.add('star');
+
             if (e.target.id === playArr[0].id && playArr.length > 0) {
                 e.target.removeEventListener('click', gameListener)
                 playArr.splice(0, 1);
@@ -63,15 +52,23 @@ const playGame = (isTrain) => {
                 star.classList.add('black');
                 rating.append(star);
             }
+            if (playArr.length === 0) {
+                const main = document.querySelector('main');
+                const blackStar = document.querySelectorAll('.black').length;
+                main.innerHTML = blackStar ? `<img class="vin" src='./img/failure.jpg' alt="">`
+                    : `<img class="vin" src='./img/success.jpg' alt="">`;
+                rating.innerHTML = blackStar ? `Errors ${blackStar}` : 'WIN'
+                rating.classList.add('finish')
+                if (blackStar) {
+                    failure.play();
+                } else { success.play(); }
+            }
         }
-
         allCardImg.forEach((el) => {
             el.addEventListener('click', gameListener);
         })
     }
-
     playDiv.addEventListener('click', startListener);
-
     return playDiv;
 }
 

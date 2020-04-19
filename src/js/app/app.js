@@ -1,20 +1,16 @@
 import '../header/navBar'
 import './app.css'
-// import '../mainPage/mainPageItem.css'
 import { actionSetA, actionSetB, actionSetС, adjective, animalSetA, animalSetB, clothes, emotion, mainPages } from '../card/data';
 import renderCard from '../card/card'
-// import renderGroupItem from '../mainPage/mainPageItem'
 import MainPageItem from '../mainPage/mainPageItem'
 import playGame from '../play/play'
 
-// let isTrain = true;
-// localStorage.setItem('isTrain', isTrain);
-
 const main = document.querySelector('main');
 const rating = document.querySelector('.rating');
-// const sectionPlayBtn = document.querySelector('section');
 const appNavigation = document.querySelector('.app-navigation');
 const toggleSwitch = document.querySelector('.toggle');
+const navLinkBtn = document.querySelectorAll('.nav-link');
+let sectionGroup = document.querySelectorAll('.section-group');
 
 const renderMainPageItem = (el, stateGame) => {
     const item = new MainPageItem(el);
@@ -22,70 +18,9 @@ const renderMainPageItem = (el, stateGame) => {
     return mainPageElement
 }
 
-const init = () => {
-    // playGame();
-    rating.innerHTML = '';
-    main.innerHTML = '';
-    const isTrain = JSON.parse(localStorage.getItem('isTrain'));
-    const activePage = localStorage.getItem('activePage');
-    main.append(playGame(isTrain));
-
-    if (activePage === 'mainPage') {
-        main.innerHTML = '';
-        mainPages.map((el) => {
-            return main.append(renderMainPageItem(el, isTrain))
-        })
-    }
-
-    if (activePage === 'actionSetA') {
-        actionSetA.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'actionSetB') {
-        actionSetB.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'actionSetC') {
-        actionSetС.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'adjective') {
-        adjective.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'animalSetA') {
-        animalSetA.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'animalSetB') {
-        animalSetB.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'clothes') {
-        clothes.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-    if (activePage === 'emotion') {
-        emotion.map((el) => {
-            return main.append(renderCard(el, isTrain))
-        });
-    }
-}
-
-toggleSwitch.addEventListener('click', () => { init() })
-
 const clickRender = (e) => {
-    // playGame();
     rating.innerHTML = '';
     main.innerHTML = '';
-
     const isTrain = JSON.parse(localStorage.getItem('isTrain'));
     const clickName = e.target.closest('.main-card') || e.target;
     main.append(playGame(isTrain));
@@ -143,32 +78,108 @@ const clickRender = (e) => {
             break;
     }
 
-    main.removeEventListener('click', clickRender);
-
     if (clickName.name === 'mainPage') {
         main.innerHTML = ''
         mainPages.map((el) => {
             return main.append(renderMainPageItem(el, isTrain))
         })
         localStorage.setItem('activePage', 'mainPage');
-        main.addEventListener('click', clickRender);
+        sectionGroup = document.querySelectorAll('.section-group');
+        sectionGroup.forEach((el) => { el.addEventListener('click', clickRender); })
     }
 }
 
-main.addEventListener('click', clickRender);
-appNavigation.addEventListener('click', clickRender)
+const init = () => {
+    rating.innerHTML = '';
+    main.innerHTML = '';
+    const isTrain = JSON.parse(localStorage.getItem('isTrain'));
+    const activePage = localStorage.getItem('activePage');
+    main.append(playGame(isTrain));
 
-// const setStateApp = () => {
-//     localStorage.setItem('isTrain', isTrain);
-// console.log('setStateApp');
-// localStorage.test = JSON.stringify({
-//     word: 'fish',
-//     translation: 'ловить рыбу',
-//     image: './img/fish.jpg',
-//     audioSrc: './audio/fish.mp3',
-// });
-// }
+    if (activePage === 'mainPage') {
+        main.innerHTML = '';
+        mainPages.map((el) => {
+            return main.append(renderMainPageItem(el, isTrain))
+        })
+        sectionGroup = document.querySelectorAll('.section-group');
+        sectionGroup.forEach((el) => { el.addEventListener('click', clickRender); })
+    }
 
-// setStateApp();
+    if (activePage === 'actionSetA') {
+        actionSetA.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'actionSetB') {
+        actionSetB.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'actionSetC') {
+        actionSetС.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'adjective') {
+        adjective.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'animalSetA') {
+        animalSetA.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'animalSetB') {
+        animalSetB.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'clothes') {
+        clothes.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+    if (activePage === 'emotion') {
+        emotion.map((el) => {
+            return main.append(renderCard(el, isTrain))
+        });
+    }
+}
+
+toggleSwitch.addEventListener('click', () => { init() })
+
+const toggleBtn = document.getElementById('toggle-menu');
+document.addEventListener('click', (e) => {
+    let check = true
+    if (e.target.closest('#toggle-menu')) {
+        check = e.target.closest('#toggle-menu').className
+    }
+    if (!check) {
+        toggleBtn.classList.add('on');
+        appNavigation.classList.add('active');
+    }
+    if (check) {
+        toggleBtn.classList.remove('on');
+        appNavigation.classList.remove('active');
+    }
+})
+
+navLinkBtn.forEach((el) => { el.addEventListener('click', clickRender); })
+
+rating.addEventListener("DOMSubtreeModified", (e) => {
+    if (e.target.textContent) {
+        setTimeout(() => {
+            const toggleSwitchBtn = document.querySelector('.toggle-button');
+            localStorage.setItem('activePage', 'mainPage');
+            localStorage.setItem('isTrain', 'true');
+            init();
+            sectionGroup.forEach((el) => { el.addEventListener('click', clickRender); })
+            toggleSwitch.classList.toggle('toggle-on');
+            toggleSwitchBtn.classList.toggle('green');
+        }, 2500);
+
+    }
+})
 
 export default init
